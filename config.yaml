@@ -1,0 +1,46 @@
+# GeoNorge -> Portolan PoC configuration. See geonorge-portolan-poc-plan.md
+# and REPORT.md for the reasoning behind these defaults.
+
+feed_url: "https://nedlasting.geonorge.no/geonorge/Tjenestefeed_daglig.xml"
+
+sample:
+  size: 20
+  # Only formats portolan-cli 0.8.0 can actually ingest (verified against
+  # src/portolan_cli/extension_registry.py: no GML/SOSI/PostGIS support).
+  # All of these are normalized to GeoPackage via ogr2ogr before `portolan
+  # add` ever sees them (see convert_gpkg.py) to sidestep a FileGDB-specific
+  # gap in the CLI's cloud-native conversion pass and a UTF-8 BOM bug in its
+  # GeoJSON reader.
+  preferred_formats: ["GEOJSON", "GPKG", "GEOPACKAGE", "SHAPE", "FGDB"]
+  prefer_national_extent: true
+  random_seed: 42
+  random_selection: true
+  # Skip yearly "historiske data" reissues so the sample favors distinct,
+  # current datasets instead of five years of the same admin-boundary layer.
+  exclude_title_pattern: "historiske data"
+  include_title_pattern: null
+
+paths:
+  cache_dir: "./cache"
+  catalog_dir: "./catalog"
+
+styling:
+  enabled: true
+  registry_url: "https://register.geonorge.no/api/tegneregler"
+  # 80 (the plan's suggested default) produced false-positive matches on
+  # short/generic titles in testing (e.g. "Kirkebygg" fuzzy-matched a coral
+  # reef habitat entry at score 86); 90 keeps the good matches and drops those.
+  match_threshold: 90
+  fallback: "portolan-default"
+
+portolan:
+  catalog_id: "geonorge-portolan-poc"
+  catalog_title: "GeoNorge -> Portolan PoC"
+  catalog_description: >-
+    Konseptbevis: et utvalg datasett fra Geonorges nedlastingstjeneste,
+    crawlet, beriket med ISO19115-metadata og automatisk publisert som en
+    Portolan STAC-katalog (GeoParquet/PMTiles).
+  catalog_license: "other"
+  catalog_license_url: "https://data.norge.no/nlod/no/2.0"
+  workers: 4
+  push_remote: null
