@@ -148,6 +148,12 @@ def run_pipeline(config: Config, *, force_refresh_feed: bool = False) -> Pipelin
         report.results.append(result)
         collection_dir = catalog_dir / collection_name
 
+        if (collection_dir / "collection.json").exists() and any(collection_dir.glob("*.gpkg")):
+            result.status = "ok"
+            result.notes.append("Already processed in a previous run; skipped re-download/convert/add")
+            logger.info("Skipping %s: already processed", entry.dataset_id)
+            continue
+
         try:
             _process_dataset(
                 entry=entry,

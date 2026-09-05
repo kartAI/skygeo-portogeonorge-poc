@@ -17,7 +17,12 @@ sample:
   random_selection: true
   # Skip yearly "historiske data" reissues so the sample favors distinct,
   # current datasets instead of five years of the same admin-boundary layer.
-  exclude_title_pattern: "historiske data"
+  # "Bygningspunkt" and "Eiendomskart Teig" (Matrikkelen - every building/
+  # cadastral parcel in Norway) are excluded too: both timed out ogr2ogr's
+  # 900s conversion budget in testing (tens of millions of features
+  # nationwide, no per-county split available) -- too large for this PoC's
+  # scope.
+  exclude_title_pattern: "historiske data|Bygningspunkt|Eiendomskart Teig"
   include_title_pattern: null
 
 paths:
