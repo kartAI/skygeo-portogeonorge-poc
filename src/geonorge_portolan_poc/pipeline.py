@@ -20,7 +20,9 @@ from geonorge_portolan_poc.metadata_yaml import (
     write_metadata_yaml,
 )
 from geonorge_portolan_poc.portolan_runner import (
+    _promote_parquet_if_orphaned,
     add_collection,
+    final_add,
     final_check_fix,
     final_check_plain,
     final_check_strict,
@@ -172,6 +174,19 @@ def run_pipeline(config: Config, *, force_refresh_feed: bool = False) -> Pipelin
     # --- Steg 7b/8: readme + final validation ------------------------------
     generate_readme(catalog_dir)
     fix_result = final_check_fix(catalog_dir, workers=config.portolan.workers)
+
+    # final_check_fix (catalog-wide) can convert a *skipped* (already-processed
+    # in an earlier run) collection's gpkg to parquet with no per-dataset add
+    # call left in this run to register it -- pick those up now.
+    final_add(catalog_dir, workers=config.portolan.workers)
+
+    # Same-stem gpkg/parquet asset-collision correction (see
+    # portolan_runner.py's module docstring), applied catalog-wide in case it
+    # affected a collection that add_collection() didn't touch this run.
+    for child in sorted(catalog_dir.iterdir()):
+        if child.is_dir() and not child.name.startswith("."):
+            _promote_parquet_if_orphaned(catalog_dir, child.name)
+
     plain_result = final_check_plain(catalog_dir)
     strict_result = final_check_strict(catalog_dir)
 
