@@ -12,6 +12,7 @@ from pathlib import Path
 import requests
 
 from geonorge_portolan_poc import csw_metadata, dataset_feed, download, feed, sample, styling
+from geonorge_portolan_poc.agents_md import write_catalog_agents_md, write_collection_agents_md
 from geonorge_portolan_poc.config import Config
 from geonorge_portolan_poc.convert_gpkg import convert_to_geopackage
 from geonorge_portolan_poc.metadata_yaml import (
@@ -22,6 +23,7 @@ from geonorge_portolan_poc.metadata_yaml import (
 from geonorge_portolan_poc.portolan_runner import (
     _promote_parquet_if_orphaned,
     add_collection,
+    configure_pmtiles_max_zoom,
     final_add,
     final_check_fix,
     final_check_plain,
@@ -116,6 +118,11 @@ def run_pipeline(config: Config, *, force_refresh_feed: bool = False) -> Pipelin
     if not init_result.ok:
         logger.error("portolan init failed:\n%s", init_result.stderr)
 
+    if config.pmtiles.enabled:
+        zoom_result = configure_pmtiles_max_zoom(catalog_dir, config.pmtiles.max_zoom)
+        if zoom_result is not None and not zoom_result.ok:
+            logger.error("Failed to set pmtiles.max_zoom:\n%s", zoom_result.stderr)
+
     catalog_meta = build_catalog_metadata(
         title=config.portolan.catalog_title, description=config.portolan.catalog_description
     )
@@ -171,21 +178,39 @@ def run_pipeline(config: Config, *, force_refresh_feed: bool = False) -> Pipelin
             result.status = "error"
             result.notes.append("Unhandled exception; see logs")
 
-    # --- Steg 7b/8: readme + final validation ------------------------------
-    generate_readme(catalog_dir)
+    # --- Steg 7b: catalog-wide fix/add/promotion pass -----------------------
     fix_result = final_check_fix(catalog_dir, workers=config.portolan.workers)
 
     # final_check_fix (catalog-wide) can convert a *skipped* (already-processed
     # in an earlier run) collection's gpkg to parquet with no per-dataset add
     # call left in this run to register it -- pick those up now.
-    final_add(catalog_dir, workers=config.portolan.workers)
+    final_add(catalog_dir, workers=config.portolan.workers, pmtiles=config.pmtiles.enabled)
 
     # Same-stem gpkg/parquet asset-collision correction (see
     # portolan_runner.py's module docstring), applied catalog-wide in case it
     # affected a collection that add_collection() didn't touch this run.
     for child in sorted(catalog_dir.iterdir()):
         if child.is_dir() and not child.name.startswith("."):
-            _promote_parquet_if_orphaned(catalog_dir, child.name)
+            _promote_parquet_if_orphaned(catalog_dir, child.name, pmtiles=config.pmtiles.enabled)
+
+    # --- Steg 7c/8: readme + AGENTS.md + final validation -------------------
+    # Runs after every add/check--fix/promotion call above so both reflect the
+    # final, settled asset state (a gpkg/parquet promotion or a late-arriving
+    # PMTiles asset would otherwise go undocumented).
+    generate_readme(catalog_dir)
+    for child in sorted(catalog_dir.iterdir()):
+        if child.is_dir() and not child.name.startswith("."):
+            write_collection_agents_md(child)
+    write_catalog_agents_md(catalog_dir)
+
+    # `portolan add` tracks README.md as a checksummed "documentation" asset
+    # (AGENTS.md is only ever linked, never asset-tracked, so it needs no
+    # equivalent step), but only re-registers it under `--force` (see
+    # final_add's docstring). Regenerating the README just above without
+    # this would leave that checksum registered against the *previous*
+    # README content, and `check` would fail PTL-DAT-001/002 on every
+    # collection -- confirmed empirically while wiring this up.
+    final_add(catalog_dir, workers=config.portolan.workers, pmtiles=config.pmtiles.enabled, force=True)
 
     plain_result = final_check_plain(catalog_dir)
     strict_result = final_check_strict(catalog_dir)
@@ -276,7 +301,12 @@ def _process_dataset(
     write_metadata_yaml(metadata, collection_dir)
 
     # --- Steg 7: portolan add / check --fix / add --------------------------
-    add_results = add_collection(collection_dir.parent, result.collection_name, workers=config.portolan.workers)
+    add_results = add_collection(
+        collection_dir.parent,
+        result.collection_name,
+        workers=config.portolan.workers,
+        pmtiles=config.pmtiles.enabled,
+    )
     if all(r.ok for r in add_results):
         result.status = "ok"
     else:

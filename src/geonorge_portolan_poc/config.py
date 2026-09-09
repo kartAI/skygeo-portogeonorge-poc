@@ -37,6 +37,15 @@ class StylingConfig:
 
 
 @dataclass
+class PmtilesConfig:
+    enabled: bool = False
+    # Caps tippecanoe's zoom range so a nationwide dataset doesn't run an
+    # unbounded (and potentially very slow) auto-detected zoom range. None
+    # lets tippecanoe auto-detect, same as omitting --max-zoom entirely.
+    max_zoom: int | None = 10
+
+
+@dataclass
 class PortolanConfig:
     catalog_id: str = "geonorge-portolan-poc"
     catalog_title: str = "GeoNorge -> Portolan PoC"
@@ -54,6 +63,7 @@ class Config:
     paths: PathsConfig = field(default_factory=PathsConfig)
     styling: StylingConfig = field(default_factory=StylingConfig)
     portolan: PortolanConfig = field(default_factory=PortolanConfig)
+    pmtiles: PmtilesConfig = field(default_factory=PmtilesConfig)
 
 
 def load_config(path: Path) -> Config:
@@ -65,6 +75,7 @@ def load_config(path: Path) -> Config:
     paths_raw = raw.get("paths", {})
     styling_raw = raw.get("styling", {})
     portolan_raw = raw.get("portolan", {})
+    pmtiles_raw = raw.get("pmtiles", {})
 
     return Config(
         feed_url=raw.get("feed_url", Config.feed_url),
@@ -75,4 +86,5 @@ def load_config(path: Path) -> Config:
         ),
         styling=StylingConfig(**styling_raw),
         portolan=PortolanConfig(**portolan_raw),
+        pmtiles=PmtilesConfig(**pmtiles_raw),
     )

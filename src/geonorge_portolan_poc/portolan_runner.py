@@ -21,6 +21,16 @@ styre via CLI-flagg. Den palitelige losningen (verifisert empirisk, se
 REPORT.md) er a fjerne den na-redundante `.gpkg`-filen for kollisjonen i det
 hele tatt kan oppsta, og kjore `add --force` pa nytt: se
 `_promote_parquet_if_orphaned` under.
+
+PMTiles-generering (`add --pmtiles`) er avhengig av det samme kvirket: `add`
+skriver bare et `*.pmtiles`-asset for en collection sin GeoParquet-fil hvis
+GeoParquet-filen allerede er REGISTRERT som asset i collection.json (bekreftet
+empirisk: `--pmtiles` pa et `add`-kall der bare `.gpkg` er registrert er en
+no-op). Sa lenge gpkg/parquet-kollisjonen over ikke er lost, forblir det
+registrerte asset-et `.gpkg`, og `--pmtiles` gjor ingenting. Derfor ma
+`--pmtiles` ligge pa `_promote_parquet_if_orphaned` sitt korrigerende
+`add --force`-kall (garantert a kjore etter at parquet er det eneste
+gjenvaerende kandidat-asset-et), ikke bare pa de tidligere add-kallene.
 """
 
 from __future__ import annotations
@@ -85,7 +95,20 @@ def init_catalog(
     return _run(args, cwd=catalog_dir)
 
 
-def _promote_parquet_if_orphaned(catalog_dir: Path, collection_name: str) -> CommandResult | None:
+def configure_pmtiles_max_zoom(catalog_dir: Path, max_zoom: int | None) -> CommandResult | None:
+    """Set catalog-wide `pmtiles.max_zoom`, once, so every later `add --pmtiles`
+    call inherits the cap without needing a per-collection config write.
+
+    Returns None (no-op) if `max_zoom` is None -- tippecanoe auto-detects instead.
+    """
+    if max_zoom is None:
+        return None
+    return _run(["portolan", "config", "set", "pmtiles.max_zoom", str(max_zoom)], cwd=catalog_dir)
+
+
+def _promote_parquet_if_orphaned(
+    catalog_dir: Path, collection_name: str, *, pmtiles: bool = False
+) -> CommandResult | None:
     """Work around the same-stem gpkg/parquet asset-collision quirk (see module docstring).
 
     If `<collection_name>.gpkg` is still the registered "data" asset even
@@ -124,17 +147,27 @@ def _promote_parquet_if_orphaned(catalog_dir: Path, collection_name: str) -> Com
         parquet_path.name,
     )
     gpkg_path.unlink()
-    return _run(["portolan", "add", "--force", collection_name], cwd=catalog_dir)
+    args = ["portolan", "add", "--force"]
+    if pmtiles:
+        args.append("--pmtiles")
+    args.append(collection_name)
+    return _run(args, cwd=catalog_dir)
 
 
-def add_collection(catalog_dir: Path, collection_name: str, *, workers: int = 4) -> list[CommandResult]:
+def add_collection(
+    catalog_dir: Path, collection_name: str, *, workers: int = 4, pmtiles: bool = False
+) -> list[CommandResult]:
     """Register a collection, converting/registering derived assets.
 
-    See module docstring for why this is four (sometimes five) steps, not one.
+    See module docstring for why this is four (sometimes five) steps, not one, and
+    why `--pmtiles` only actually takes effect once the corrective step runs.
     """
     results = []
 
-    r = _run(["portolan", "add", "--force", "--thumbnails", collection_name], cwd=catalog_dir)
+    add_args = ["portolan", "add", "--force", "--thumbnails"]
+    if pmtiles:
+        add_args.append("--pmtiles")
+    r = _run([*add_args, collection_name], cwd=catalog_dir)
     results.append(r)
     if not r.ok:
         return results
@@ -145,10 +178,13 @@ def add_collection(catalog_dir: Path, collection_name: str, *, workers: int = 4)
     )
     results.append(r)
 
-    r = _run(["portolan", "add", collection_name], cwd=catalog_dir)
+    add_args = ["portolan", "add"]
+    if pmtiles:
+        add_args.append("--pmtiles")
+    r = _run([*add_args, collection_name], cwd=catalog_dir)
     results.append(r)
 
-    correction = _promote_parquet_if_orphaned(catalog_dir, collection_name)
+    correction = _promote_parquet_if_orphaned(catalog_dir, collection_name, pmtiles=pmtiles)
     if correction is not None:
         results.append(correction)
 
@@ -164,7 +200,7 @@ def final_check_fix(catalog_dir: Path, *, workers: int = 4) -> CommandResult:
     return _run(args, cwd=catalog_dir, timeout=1800)
 
 
-def final_add(catalog_dir: Path, *, workers: int = 4) -> CommandResult:
+def final_add(catalog_dir: Path, *, workers: int = 4, pmtiles: bool = False, force: bool = False) -> CommandResult:
     """Register anything `final_check_fix` just converted but left unregistered.
 
     On a resumed run, a collection skipped by `run_pipeline` (already
@@ -172,9 +208,30 @@ def final_add(catalog_dir: Path, *, workers: int = 4) -> CommandResult:
     own add->check--fix->add sequence in *this* run. If `final_check_fix`
     (running catalog-wide) is what ends up converting that collection's
     gpkg to parquet, there is otherwise no later `add` call left to register
-    it -- run one here, once, for the whole catalog.
+    it -- run one here, once, for the whole catalog. Passing `--pmtiles` here
+    too means a resumed run still gets PMTiles for collections that were
+    skipped this run (see `_promote_parquet_if_orphaned`, run catalog-wide
+    right after this in `pipeline.py`, for where it usually actually lands).
+
+    `add`'s own change detection does not re-scan a "documentation" asset
+    (README.md) just because its content changed on disk -- confirmed
+    empirically: a plain `add`/`add <collection>` reports README.md's
+    companion file as already tracked and leaves its registered checksum
+    untouched even after `portolan readme` rewrote it, so `check` then fails
+    PTL-DAT-001/002 (declared checksum/size vs actual bytes). Only
+    `--force` (all files, ignoring change detection) re-registers it. Pass
+    `force=True` for the pass that runs right after `generate_readme`; the
+    earlier catalog-wide pass (picking up `final_check_fix`'s conversions)
+    should stay unforced so it doesn't needlessly re-hash every asset in the
+    catalog on every run.
     """
-    return _run(["portolan", "add", ".", "--workers", str(workers)], cwd=catalog_dir, timeout=1800)
+    args = ["portolan", "add", "."]
+    if pmtiles:
+        args.append("--pmtiles")
+    if force:
+        args.append("--force")
+    args += ["--workers", str(workers)]
+    return _run(args, cwd=catalog_dir, timeout=1800)
 
 
 def final_check_plain(catalog_dir: Path) -> CommandResult:

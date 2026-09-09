@@ -31,9 +31,13 @@ A single pipeline (`geonorge-poc run`) does, in order:
    authoritative style, falling back to Portolan's auto-generated default
    style when none is found.
 7. Writes a Portolan `metadata.yaml` per collection from the CSW metadata.
-8. Runs `portolan add` / `check --fix` / `add` per collection, then
+8. Runs `portolan add` / `check --fix` / `add` per collection (with
+   `--pmtiles` when `pmtiles.enabled` in `config.yaml`, generating a PMTiles
+   visualization asset + default MapLibre style per collection), then
    `portolan readme` and `portolan check --strict` on the whole catalog.
-9. Writes `REPORT.md` summarizing what succeeded/failed and why.
+9. Fills in each collection's (and the catalog's own) `AGENTS.md` — see
+   "AGENTS.md generation" below.
+10. Writes `REPORT.md` summarizing what succeeded/failed and why.
 
 ## Prerequisites
 
@@ -41,6 +45,11 @@ A single pipeline (`geonorge-poc run`) does, in order:
   bare `pip`/`python`).
 - `ogr2ogr` (GDAL) on `PATH` — used to normalize every downloaded format to
   GeoPackage before portolan ever sees it. Tested against GDAL 3.12.
+- `tippecanoe` on `PATH` — used by `portolan add --pmtiles` to build the
+  PMTiles visualization asset. `brew install tippecanoe` (macOS) or
+  `apt install tippecanoe` (Ubuntu). Only needed if `pmtiles.enabled: true`
+  in `config.yaml` (the default); set it to `false` to skip PMTiles entirely
+  and drop this dependency.
 - Everything else (`portolan-cli`, `lxml`, `rapidfuzz`, ...) is declared in
   `pyproject.toml` and installed automatically by `uv run`/`uv sync`.
 
@@ -116,9 +125,35 @@ no code changes needed for a different sample:
 | `paths.cache_dir` / `paths.catalog_dir` | Where raw feed/CSW XML is cached and where the catalog is built. |
 | `styling.*` | Tune/disable the `tegneregler` cartography lookup and its fuzzy-match threshold. |
 | `portolan.*` | Catalog id/title/description/license and `portolan check --fix` worker count. |
+| `pmtiles.enabled` | Generate a PMTiles visualization asset per collection with `portolan add --pmtiles` (requires `tippecanoe`). |
+| `pmtiles.max_zoom` | Caps tippecanoe's zoom range catalog-wide (set once via `portolan config set pmtiles.max_zoom`) to bound build time/output size on nationwide datasets; `null` lets tippecanoe auto-detect. |
 
 To do a smaller/larger or differently-filtered run, edit `config.yaml` (or
 pass `--sample-size` for a one-off override) rather than changing code.
+
+## AGENTS.md generation
+
+`portolan init`/`add` only ever write a placeholder `AGENTS.md` — section
+headers with HTML-comment prompts ("Replace the prompts below with real
+content"), meant for a human to fill in by hand. This pipeline fills that
+skeleton in automatically, once per run, for every collection and for the
+catalog root, from `collection.json`/`catalog.json` (the STAC fields
+Portolan itself already computed: schema, bbox, feature count, license,
+registered assets) plus each collection's `.portolan/metadata.yaml` (the
+human-authored enrichment — title, description, contact, source URL,
+processing notes).
+
+This is deliberately **template-based, not LLM-generated**: no model call,
+no extra data-profiling pass over the actual features. It produces the
+mechanical sections reliably (schema table, DuckDB/geopandas snippets
+using the real filenames and columns, license/CRS/extent facts, a plain
+row-count/bbox query and a "check whether this column is coded" query
+templated off the schema) but does *not* attempt the kind of domain-level
+narrative (decoded categorical values, cross-collection join keys, dataset
+provenance nuance) that requires either manual authoring or feeding a
+schema profile through an LLM — see `IMPROVEMENTS.md` for that
+alternative design and why it was intentionally not built here. See
+`agents_md.py`'s module docstring for the reasoning in full.
 
 ## Known quirks discovered during implementation
 
@@ -163,7 +198,8 @@ src/geonorge_portolan_poc/
     styling.py                # steg 5b: tegneregler lookup + fuzzy match
     metadata_yaml.py          # steg 6: build Portolan metadata.yaml
     portolan_runner.py         # steg 7: subprocess wrapper around portolan-cli
-    pipeline.py                # orchestrates steg 1-8, resumable
+    agents_md.py                # steg 7c: fill AGENTS.md from collection.json + metadata.yaml
+    pipeline.py                # orchestrates steg 1-9, resumable
     report.py                  # writes REPORT.md
     cli.py                      # `geonorge-poc run` entrypoint
 cache/                       # gitignored: cached raw feed/CSW XML + tegneregler registry

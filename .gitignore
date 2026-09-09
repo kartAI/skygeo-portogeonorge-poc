@@ -16,3 +16,5 @@ wheels/
 # catalog/ holds multi-GB downloaded/converted geodata, not source.
 /cache/
 /catalog/
+/catalog_backup/
+.DS_Store

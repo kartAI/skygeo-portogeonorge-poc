@@ -49,3 +49,15 @@ portolan:
   catalog_license_url: "https://data.norge.no/nlod/no/2.0"
   workers: 4
   push_remote: null
+
+pmtiles:
+  # Requires the `tippecanoe` binary on PATH (brew install tippecanoe /
+  # apt install tippecanoe). When false, no collection gets a PMTiles asset
+  # and pmtiles.max_zoom is never written to the catalog's config.
+  enabled: true
+  # Caps tippecanoe's zoom range catalog-wide (via `portolan config set
+  # pmtiles.max_zoom`, run once at init) so a nationwide dataset doesn't
+  # trigger an unbounded auto-detected zoom range -- the main lever for
+  # keeping PMTiles build time bounded. Set to null to let tippecanoe
+  # auto-detect (can be slow/large for the bigger nationwide datasets).
+  max_zoom: 12
