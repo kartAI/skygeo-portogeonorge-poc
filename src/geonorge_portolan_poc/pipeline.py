@@ -157,7 +157,15 @@ def run_pipeline(config: Config, *, force_refresh_feed: bool = False) -> Pipelin
         report.results.append(result)
         collection_dir = catalog_dir / collection_name
 
-        if (collection_dir / "collection.json").exists() and any(collection_dir.glob("*.gpkg")):
+        # `<collection>.gpkg.bak` (see _process_dataset) is the reliable
+        # "fully processed" marker: unlike the primary `<collection>.gpkg`,
+        # which a successful run's asset-collision workaround deletes (and
+        # which is therefore absent for a collection that finished processing
+        # cleanly), the archival backup is written once and never touched
+        # again, so its presence can't be mistaken for an in-progress run.
+        if (collection_dir / "collection.json").exists() and (
+            collection_dir / f"{collection_name}.gpkg.bak"
+        ).exists():
             result.status = "ok"
             result.notes.append("Already processed in a previous run; skipped re-download/convert/add")
             logger.info("Skipping %s: already processed", entry.dataset_id)
@@ -280,6 +288,20 @@ def _process_dataset(
         result.notes.append(f"ogr2ogr could not convert the downloaded {entry.format} file to GeoPackage")
         shutil.rmtree(collection_dir, ignore_errors=True)
         return
+
+    # The `<collection>.gpkg` add_collection() is about to process is only
+    # ever a stepping stone to GeoParquet: portolan-cli's asset-collision
+    # workaround (see portolan_runner.py's module docstring) deletes it once
+    # promoted, and for multi-layer sources it can end up orphaned (present
+    # on disk but never registered as an asset) instead. Either way the
+    # original GeoPackage is lost from the published catalog. Archive a copy
+    # under a `.gpkg.bak` suffix -- not `.gpkg`, which `portolan check --fix`
+    # would otherwise treat as a convertible geo asset and re-derive (and
+    # fail to register) a GeoParquet copy from on every future run -- before
+    # add_collection() runs, so the first `portolan add` picks it up and
+    # registers it as its own permanent, checksummed asset.
+    original_gpkg_backup = collection_dir / f"{result.collection_name}.gpkg.bak"
+    shutil.copy2(gpkg_path, original_gpkg_backup)
 
     # --- Steg 5b: authoritative styling (best-effort) -----------------------
     if config.styling.enabled and registry:
