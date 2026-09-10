@@ -1,5 +1,15 @@
-# GeoNorge → Portolan: et konseptbevis
+# PortoGeoNorge - Portolan SDI av GeoNorge
 
+**TL;DR:**
+- 20 datasett og metadata hentet automatisk fra GeoNorge, konvertert til Portolan-SDI og publisert som cloud native-filer (GeoParquet + PMTiles)
+- Les mer om Portolan på https://www.portolan-sdi.org/
+- Prøv katalogen selv: utforsk den visuelt i [Portolan Browser](https://browser.portolan-sdi.org/#/external/kartaistorage.blob.core.windows.net/skygeo/geonorge2portolan-poc/catalog.json)- La en agent som Claude Desktop koble seg rett på katalog-URL-en 
+```
+Jeg vil finne ut hvilke bygninger som ligger innenfor 5 km av Forsvarets skyte-og øvingsfelt.
+Dette er datakatalogen jeg vil bruke: https://kartaistorage.blob.core.windows. net/skygeo/geonorge2portolan-poc/AGENTS.md
+```
+
+## Proof-of-Concept
 Norge har allerede en solid geodatainfrastruktur i GeoNorge. Men dataene
 ligger der i formater og tjenester bygget for GIS-verktøy — ikke for
 LLM-er og AI-agenter som skal lese, koble og analysere data på egen hånd.
