@@ -88,5 +88,4 @@ interaktiv rapport:
 ## Konklusjon
 
 PoC-en viser at norske åpne geodata kan gjøres tilgjengelige for
-AI-agenter i dag, med eksisterende data og et automatisert
-publiseringssteg — ikke en ny geodatainfrastruktur fra bunnen av.
+utviklere og AI-agenter med bruk av cloud native-formater og Portolan SDI
