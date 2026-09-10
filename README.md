@@ -30,6 +30,25 @@ en ferdig STAC-katalog med GeoParquet-data, PMTiles-visualisering og
 agent-dokumentasjon per datasett. Se
 [README.technical.md](README.technical.md) for de tekniske detaljene.
 
+Under panseret er det [Portolan CLI](https://portolan-sdi.org) som gjør
+selve katalog-arbeidet:
+
+```bash
+# Én gang, ved oppstart
+portolan init --auto --id <id> --title <tittel> --license <lisens>
+
+# Per datasett
+portolan add --force --thumbnails --pmtiles <collection>
+portolan check <collection> --fix
+portolan add --pmtiles <collection>
+
+# Til slutt, for hele katalogen
+portolan readme
+portolan check . --fix
+portolan add . --pmtiles --force
+portolan check . --strict
+```
+
 ## Resultatet
 
 Kjøringen hentet **20 datasett** fra GeoNorge og publiserte **18** av dem
