@@ -1,4 +1,4 @@
-# PortoGeoNorge - Portolan SDI av GeoNorge
+# PortoGeoNorge - PoC på Cloud Native Portolan SDI av GeoNorge
 
 **TL;DR:**
 - 20 datasett og metadata hentet automatisk fra GeoNorge, konvertert til Portolan-SDI og publisert som cloud native-filer (GeoParquet + PMTiles)
@@ -6,7 +6,7 @@
 - Prøv katalogen selv: utforsk den visuelt i [Portolan Browser](https://browser.portolan-sdi.org/#/external/kartaistorage.blob.core.windows.net/skygeo/geonorge2portolan-poc/catalog.json)- La en agent som Claude Desktop koble seg rett på katalog-URL-en 
 ```
 Jeg vil finne ut hvilke bygninger som ligger innenfor 5 km av Forsvarets skyte-og øvingsfelt.
-Dette er datakatalogen jeg vil bruke: https://kartaistorage.blob.core.windows. net/skygeo/geonorge2portolan-poc/AGENTS.md
+Dette er datakatalogen jeg vil bruke: https://kartaistorage.blob.core.windows.net/skygeo/geonorge2portolan-poc/AGENTS.md
 ```
 
 ## Proof-of-Concept
