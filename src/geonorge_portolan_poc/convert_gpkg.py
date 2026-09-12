@@ -57,6 +57,8 @@ def convert_to_geopackage(raw_dir: Path, fmt: str, collection_dir: Path, *, laye
     if source == dest:
         return source
 
+    logger.info("Converting %s (%s) -> %s", source, fmt, dest)
+
     try:
         result = subprocess.run(
             [
@@ -66,10 +68,15 @@ def convert_to_geopackage(raw_dir: Path, fmt: str, collection_dir: Path, *, laye
                 "-nlt",
                 "PROMOTE_TO_MULTI",
                 "-skipfailures",
+                "-progress",
                 str(dest),
                 str(source),
             ],
-            capture_output=True,
+            # -progress writes a live percentage bar to stdout; leave it
+            # uncaptured (inherits the parent's terminal) so it's actually
+            # visible while a large conversion runs. Only stderr is used
+            # below (for the failure message), so that alone is captured.
+            stderr=subprocess.PIPE,
             text=True,
             timeout=900,
         )
