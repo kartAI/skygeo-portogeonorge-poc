@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 # Formats (as tagged by the level-1 feed's AtomFeed<FORMAT>.xml naming, see
 # feed.py) that GDAL/OGR can read directly and that we've validated convert
 # cleanly to GeoPackage.
-CONVERTIBLE_FORMATS = {"GEOJSON", "GPKG", "GEOPACKAGE", "SHAPE", "FGDB"}
+CONVERTIBLE_FORMATS = {"GEOJSON", "GPKG", "GEOPACKAGE", "SHAPE", "FGDB", "GML"}
 
 
 def _find_source(raw_dir: Path, fmt: str) -> Path | None:
@@ -33,6 +33,8 @@ def _find_source(raw_dir: Path, fmt: str) -> Path | None:
         candidates = list(raw_dir.glob("*.shp"))
     elif fmt == "GEOJSON":
         candidates = list(raw_dir.glob("*.geojson")) + list(raw_dir.glob("*.json"))
+    elif fmt == "GML":
+        candidates = list(raw_dir.glob("*.gml"))
     else:
         candidates = []
     return candidates[0] if candidates else None

@@ -11,7 +11,7 @@ from pathlib import Path
 
 import requests
 
-from geonorge_portolan_poc import csw_metadata, dataset_feed, download, feed, sample, styling
+from geonorge_portolan_poc import csw_metadata, dataset_feed, dok_register, download, feed, sample, styling
 from geonorge_portolan_poc.agents_md import write_catalog_agents_md, write_collection_agents_md
 from geonorge_portolan_poc.config import Config
 from geonorge_portolan_poc.convert_gpkg import convert_to_geopackage
@@ -93,6 +93,17 @@ def run_pipeline(config: Config, *, force_refresh_feed: bool = False) -> Pipelin
     logger.info("Parsed %d entries across %d unique datasets", len(entries), len(grouped))
 
     # --- Steg 2: sample ----------------------------------------------------
+    allowed_uuids: set[str] | None = None
+    if config.sample.dok_register_enabled:
+        register_csv = dok_register.fetch_register(
+            config.sample.dok_register_url,
+            cache_dir / "geodatalov-statusregister.csv",
+            force_refresh=force_refresh_feed,
+            session=session,
+        )
+        allowed_uuids = dok_register.parse_register_uuids(register_csv)
+        logger.info("Loaded %d DOK-register UUIDs for allow-list filtering", len(allowed_uuids))
+
     logger.info("Steg 2: selecting sample (size=%d)", config.sample.size)
     selected, skip_reasons = sample.select_sample(
         grouped,
@@ -102,6 +113,7 @@ def run_pipeline(config: Config, *, force_refresh_feed: bool = False) -> Pipelin
         include_title_pattern=config.sample.include_title_pattern,
         exclude_title_pattern=config.sample.exclude_title_pattern,
         random_selection=config.sample.random_selection,
+        allowed_uuids=allowed_uuids,
     )
     report.sample_skipped = skip_reasons
     logger.info("Selected %d datasets for the sample", len(selected))

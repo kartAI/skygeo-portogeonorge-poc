@@ -13,13 +13,15 @@ import yaml
 class SampleConfig:
     size: int = 20
     preferred_formats: list[str] = field(
-        default_factory=lambda: ["GEOJSON", "GPKG", "GEOPACKAGE", "SHAPE", "FGDB"]
+        default_factory=lambda: ["GEOJSON", "GPKG", "GEOPACKAGE", "SHAPE", "FGDB", "GML"]
     )
     prefer_national_extent: bool = True
     random_seed: int | None = 42
     random_selection: bool = True
     exclude_title_pattern: str | None = None
     include_title_pattern: str | None = None
+    dok_register_enabled: bool = False
+    dok_register_url: str = "https://register.geonorge.no/api/geodatalov-statusregister.csv"
 
 
 @dataclass

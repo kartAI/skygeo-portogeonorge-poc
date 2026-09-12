@@ -6,6 +6,7 @@ import logging
 import random
 import re
 
+from geonorge_portolan_poc.dok_register import extract_uuid
 from geonorge_portolan_poc.feed import FeedEntry
 
 logger = logging.getLogger(__name__)
@@ -20,6 +21,7 @@ def select_sample(
     include_title_pattern: str | None = None,
     exclude_title_pattern: str | None = None,
     random_selection: bool = True,
+    allowed_uuids: set[str] | None = None,
 ) -> tuple[list[FeedEntry], dict[str, str]]:
     """Pick one FeedEntry (one format) per unique dataset, then sample N datasets.
 
@@ -27,6 +29,10 @@ def select_sample(
     ``preferred_formats``, e.g. GEOJSON/GPKG/SHAPE/FGDB) -- a dataset that is
     only available in an unsupported format (SOSI, PostGIS-dump, GML, ...) has
     no candidate entry and cannot be picked, since it would break step 7.
+
+    ``allowed_uuids``, when given, is an allow-list of DOK-register metadata
+    UUIDs (see ``dok_register.py``): a dataset whose feed-entry UUID isn't in
+    it is excluded before any other filtering happens.
 
     Returns:
         (selected_entries, skip_reasons) where skip_reasons maps
@@ -42,6 +48,13 @@ def select_sample(
 
     for dataset_id, entries in grouped.items():
         title_sample = entries[0].title
+
+        if allowed_uuids is not None:
+            entry_uuid = extract_uuid(entries[0].csw_metadata_url)
+            if entry_uuid is None or entry_uuid not in allowed_uuids:
+                skip_reasons[dataset_id] = "not in DOK geodatalov-statusregister allow-list"
+                continue
+
         if include_re and not any(include_re.search(e.title) for e in entries):
             skip_reasons[dataset_id] = f"title didn't match include pattern ({title_sample!r})"
             continue

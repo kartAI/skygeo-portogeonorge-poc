@@ -5,13 +5,14 @@ feed_url: "https://nedlasting.geonorge.no/geonorge/Tjenestefeed_daglig.xml"
 
 sample:
   size: 20
-  # Only formats portolan-cli 0.8.0 can actually ingest (verified against
-  # src/portolan_cli/extension_registry.py: no GML/SOSI/PostGIS support).
-  # All of these are normalized to GeoPackage via ogr2ogr before `portolan
-  # add` ever sees them (see convert_gpkg.py) to sidestep a FileGDB-specific
-  # gap in the CLI's cloud-native conversion pass and a UTF-8 BOM bug in its
-  # GeoJSON reader.
-  preferred_formats: ["GEOJSON", "GPKG", "GEOPACKAGE", "SHAPE", "FGDB"]
+  # Formats GDAL/OGR can read directly. All of these are normalized to
+  # GeoPackage via ogr2ogr before `portolan add` ever sees them (see
+  # convert_gpkg.py) to sidestep a FileGDB-specific gap in portolan-cli
+  # 0.8.0's cloud-native conversion pass and a UTF-8 BOM bug in its GeoJSON
+  # reader -- so portolan-cli's own (narrower) native format support doesn't
+  # constrain this list. GML is listed last: ogr2ogr handles it, but its
+  # schema auto-detection can be slower on large files than the others here.
+  preferred_formats: ["GEOJSON", "GPKG", "GEOPACKAGE", "SHAPE", "FGDB", "GML"]
   prefer_national_extent: true
   random_seed: 42
   random_selection: true
@@ -24,6 +25,14 @@ sample:
   # scope.
   exclude_title_pattern: "historiske data|Bygningspunkt|Eiendomskart Teig"
   include_title_pattern: null
+  # When true, restrict the candidate pool to datasets whose metadata UUID
+  # appears in Geonorge's DOK (Det offentlige kartgrunnlaget) status
+  # register -- the nationally significant/priority dataset list. Matched by
+  # UUID (tjenestefeed's CSW describedby link vs. the register's kartkatalog
+  # link), not by title, so formatting differences between the two sources
+  # don't cause false negatives. See dok_register.py.
+  dok_register_enabled: false
+  dok_register_url: "https://register.geonorge.no/api/geodatalov-statusregister.csv"
 
 paths:
   cache_dir: "./cache"

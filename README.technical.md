@@ -161,10 +161,12 @@ These are documented here because they're non-obvious and future runs will
 hit them again — see `REPORT.md` for the full list and `convert_gpkg.py`'s
 module docstring for the code-level detail:
 
-- **portolan-cli 0.8.0 has no GML/SOSI/PostGIS-dump support at all.** The
-  sample can only be drawn from GEOJSON/GPKG/SHAPE/FGDB — the plan's
-  original preference for GML had to be dropped once this was verified
-  against `portolan_cli`'s extension registry.
+- **portolan-cli 0.8.0 has no GML/SOSI/PostGIS-dump support at all**, but
+  this no longer constrains the sample: every downloaded file is normalized
+  to GeoPackage with `ogr2ogr` first (see below), and GDAL's GML driver
+  handles it fine, so GML is back in `preferred_formats` alongside
+  GEOJSON/GPKG/SHAPE/FGDB. SOSI and PostGIS-dump remain unsupported —
+  neither has a usable GDAL/OGR driver here.
 - **Every downloaded file is normalized to GeoPackage with `ogr2ogr` before
   `portolan add` ever sees it**, because (a) portolan-cli 0.8.0's cloud-native
   conversion pass silently skips FileGDB (`.gdb`) inputs, and (b) GeoNorge's

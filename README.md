@@ -72,6 +72,42 @@ GIS-server.
 - **Utforsk katalogen visuelt i Portolan Browser:**
   https://browser.portolan-sdi.org/#/external/kartaistorage.blob.core.windows.net/skygeo/geonorge2portolan-poc/catalog.json
 
+## Last ned alle DOK-datasett (ikke bare utvalget)
+
+Standardkjøringen tar et tilfeldig **utvalg** på 20 datasett. For å i
+stedet hente **alle** datasett som står i Geonorges DOK-statusregister
+(`geodatalov-statusregister.csv` — Det offentlige kartgrunnlagets
+prioriterte datasett), bruk registeret som en allow-list og sett
+utvalgsstørrelsen høyt nok til at ingen treff blir kuttet:
+
+1. Åpne [config.yaml](config.yaml) og sett:
+   ```yaml
+   sample:
+     size: 100  # DOK-registeret har for tiden 52 datasett i et støttet
+                # format (GEOJSON/GPKG/SHAPE/FGDB/GML); 100 gir god margin
+                # hvis registeret vokser. Er size >= antall treff blir
+                # samtlige tatt med, ellers trekkes et tilfeldig utvalg.
+     dok_register_enabled: true
+   ```
+   `exclude_title_pattern`/`include_title_pattern` filtrerer fortsatt
+   *etter* DOK-utvalget er gjort (f.eks. for å fortsatt hoppe over
+   "historiske data"-reutgivelser) — juster eller nullstill dem etter
+   behov.
+
+2. Kjør pipelinen:
+   ```bash
+   uv run geonorge-poc run --config config.yaml
+   ```
+   (`--sample-size` på kommandolinjen overstyrer `sample.size` i
+   config.yaml om du vil justere marginen uten å redigere filen, f.eks.
+   `uv run geonorge-poc run --sample-size 200`.)
+
+3. Sjekk `REPORT.md` etter kjøring: `sample_skipped`-lista viser hvilke
+   datasett som ble ekskludert og hvorfor (f.eks. "not in DOK
+   geodatalov-statusregister allow-list" for datasett utenfor
+   registeret, eller "no preferred/supported format available" for
+   DOK-datasett som mangler et format pipelinen kan konvertere).
+
 ## Eksempel: analyse med Claude Desktop
 
 Fordi hver samling har en `AGENTS.md` med data-plassering, skjema og
