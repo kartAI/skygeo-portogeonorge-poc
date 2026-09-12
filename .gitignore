@@ -18,3 +18,5 @@ wheels/
 /catalog/
 /catalog_backup/
 .DS_Store
+pmtiles_experiment/*.parquet
+pmtiles_experiment/*.pmtiles
