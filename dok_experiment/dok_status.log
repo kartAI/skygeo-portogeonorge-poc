@@ -1,0 +1,264 @@
+2026-09-22 13:05:55 INFO Fetching DOK status register...
+2026-09-22 13:05:55 INFO   324 DOK datasets in register.
+2026-09-22 13:05:55 INFO Fetching tjenestefeed...
+2026-09-22 13:05:55 INFO   1743 dataset/format entries in feed.
+2026-09-22 13:05:55 INFO ======================================================================
+2026-09-22 13:05:55 INFO DOK DATASET STATUS
+2026-09-22 13:05:55 INFO ======================================================================
+2026-09-22 13:05:55 INFO DOK datasets total (in feed): 135
+2026-09-22 13:05:55 INFO has supported format: 99
+2026-09-22 13:05:55 INFO no supported format: 36
+2026-09-22 13:05:55 INFO all format counts across DOK datasets:
+2026-09-22 13:05:55 INFO   SOSI 96
+2026-09-22 13:05:55 INFO   FGDB 95
+2026-09-22 13:05:55 INFO   GML 94
+2026-09-22 13:05:55 INFO   POSTGIS 64
+2026-09-22 13:05:55 INFO   TIFF 20
+2026-09-22 13:05:55 INFO   AI 6
+2026-09-22 13:05:55 INFO   JPEG 6
+2026-09-22 13:05:55 INFO   EMF 6
+2026-09-22 13:05:55 INFO   PPTX 5
+2026-09-22 13:05:55 INFO   DEM 4
+2026-09-22 13:05:55 INFO   GPKG 4
+2026-09-22 13:05:55 INFO   XYZ 4
+2026-09-22 13:05:55 INFO   GEOJSON 3
+2026-09-22 13:05:55 INFO   SHAPE 3
+2026-09-22 13:05:55 INFO   ENH 3
+2026-09-22 13:05:55 INFO   NED 3
+2026-09-22 13:05:55 INFO   GEOPACKAGE 2
+2026-09-22 13:05:55 INFO   CSV 2
+2026-09-22 13:05:55 INFO   XLSX 1
+2026-09-22 13:05:55 INFO   S57 1
+2026-09-22 13:05:55 INFO   DAT 1
+2026-09-22 13:05:55 INFO   GPX 1
+2026-09-22 13:05:55 INFO   SPATIALITE 1
+2026-09-22 13:05:55 INFO formats present ONLY on DOK datasets lacking any supported format:
+2026-09-22 13:05:55 INFO   TIFF 20
+2026-09-22 13:05:55 INFO   AI 6
+2026-09-22 13:05:55 INFO   JPEG 6
+2026-09-22 13:05:55 INFO   EMF 6
+2026-09-22 13:05:55 INFO   SOSI 6
+2026-09-22 13:05:55 INFO   PPTX 5
+2026-09-22 13:05:55 INFO   DEM 4
+2026-09-22 13:05:55 INFO   XYZ 4
+2026-09-22 13:05:55 INFO   ENH 3
+2026-09-22 13:05:55 INFO   NED 3
+2026-09-22 13:05:55 INFO   XLSX 1
+2026-09-22 13:05:55 INFO   DAT 1
+2026-09-22 13:05:55 INFO   GML 1
+2026-09-22 13:05:55 INFO ======================================================================
+2026-09-22 13:05:59 INFO Fetching DOK status register...
+2026-09-22 13:05:59 INFO   324 DOK datasets in register.
+2026-09-22 13:05:59 INFO Fetching tjenestefeed...
+2026-09-22 13:05:59 INFO   1743 dataset/format entries in feed.
+2026-09-22 13:05:59 INFO ======================================================================
+2026-09-22 13:05:59 INFO DOK DATASET STATUS
+2026-09-22 13:05:59 INFO ======================================================================
+2026-09-22 13:05:59 INFO DOK datasets total (in feed): 135
+2026-09-22 13:05:59 INFO has supported format: 99
+2026-09-22 13:05:59 INFO no supported format: 36
+2026-09-22 13:05:59 INFO all format counts across DOK datasets:
+2026-09-22 13:05:59 INFO   SOSI 96
+2026-09-22 13:05:59 INFO   FGDB 95
+2026-09-22 13:05:59 INFO   GML 94
+2026-09-22 13:05:59 INFO   POSTGIS 64
+2026-09-22 13:05:59 INFO   TIFF 20
+2026-09-22 13:05:59 INFO   JPEG 6
+2026-09-22 13:05:59 INFO   AI 6
+2026-09-22 13:05:59 INFO   EMF 6
+2026-09-22 13:05:59 INFO   PPTX 5
+2026-09-22 13:05:59 INFO   DEM 4
+2026-09-22 13:05:59 INFO   GPKG 4
+2026-09-22 13:05:59 INFO   XYZ 4
+2026-09-22 13:05:59 INFO   GEOJSON 3
+2026-09-22 13:05:59 INFO   SHAPE 3
+2026-09-22 13:05:59 INFO   NED 3
+2026-09-22 13:05:59 INFO   ENH 3
+2026-09-22 13:05:59 INFO   GEOPACKAGE 2
+2026-09-22 13:05:59 INFO   CSV 2
+2026-09-22 13:05:59 INFO   XLSX 1
+2026-09-22 13:05:59 INFO   S57 1
+2026-09-22 13:05:59 INFO   DAT 1
+2026-09-22 13:05:59 INFO   GPX 1
+2026-09-22 13:05:59 INFO   SPATIALITE 1
+2026-09-22 13:05:59 INFO formats present ONLY on DOK datasets lacking any supported format:
+2026-09-22 13:05:59 INFO   TIFF 20
+2026-09-22 13:05:59 INFO   JPEG 6
+2026-09-22 13:05:59 INFO   AI 6
+2026-09-22 13:05:59 INFO   EMF 6
+2026-09-22 13:05:59 INFO   SOSI 6
+2026-09-22 13:05:59 INFO   PPTX 5
+2026-09-22 13:05:59 INFO   DEM 4
+2026-09-22 13:05:59 INFO   XYZ 4
+2026-09-22 13:05:59 INFO   NED 3
+2026-09-22 13:05:59 INFO   ENH 3
+2026-09-22 13:05:59 INFO   XLSX 1
+2026-09-22 13:05:59 INFO   DAT 1
+2026-09-22 13:05:59 INFO   GML 1
+2026-09-22 13:05:59 INFO ======================================================================
+2026-09-22 13:05:59 INFO Sizing 15 DOK datasets (all formats)...
+2026-09-22 13:06:06 INFO   15/15 datasets sized (6s elapsed)
+2026-09-22 13:06:06 INFO Wrote 15 rows to /Users/alenos/dev/portolan-poc/dok_experiment/dok_status.csv
+2026-09-22 13:06:06 INFO ======================================================================
+2026-09-22 13:06:06 INFO DOK DATASET SIZES (all datasets, best available format each)
+2026-09-22 13:06:06 INFO ======================================================================
+2026-09-22 13:06:06 INFO Datasets sized      : 15
+2026-09-22 13:06:06 INFO Files counted       : 3913
+2026-09-22 13:06:06 INFO Datasets with errors: 0
+2026-09-22 13:06:06 INFO Total size          : 4.27 GB (4373.1 MB)
+2026-09-22 13:06:06 INFO Top 20 DOK datasets by size:
+2026-09-22 13:06:06 INFO       2317.7 MB  ( 681 filer,       FGDB)  Aktsomhetskart for snøskred
+2026-09-22 13:06:06 INFO       1487.2 MB  ( 679 filer,       FGDB)  Aktsomhetskart for jord- og flomskred
+2026-09-22 13:06:06 INFO        395.6 MB  ( 681 filer,       FGDB)  Aktsomhetskart for kvikkleireskred
+2026-09-22 13:06:06 INFO        104.8 MB  (1055 filer,    GEOJSON)  Administrative enheter kommuner
+2026-09-22 13:06:06 INFO         30.4 MB  ( 506 filer,       FGDB)  Akvakultur - lokaliteter
+2026-09-22 13:06:06 INFO         29.4 MB  ( 302 filer,       FGDB)  Banenettverk
+2026-09-22 13:06:06 INFO          2.7 MB  (   1 filer,       XLSX)  Arealstatistikk for Norge
+2026-09-22 13:06:06 INFO          1.7 MB  (   1 filer,       FGDB)  Arbeidsgiveravgiftsoner
+2026-09-22 13:06:06 INFO          1.7 MB  (   1 filer,         AI)  Antarktis
+2026-09-22 13:06:06 INFO          1.1 MB  (   1 filer,       FGDB)  Artsmangfold - Videoobserverte korallbunntyper
+2026-09-22 13:06:06 INFO          0.3 MB  (   1 filer,       FGDB)  Artsmangfold – Videoobservasjoner
+2026-09-22 13:06:06 INFO          0.3 MB  (   1 filer,       FGDB)  Artsmangfold – Svampobservasjoner per videotransekt
+2026-09-22 13:06:06 INFO          0.1 MB  (   1 filer,       FGDB)  Ankringsområder
+2026-09-22 13:06:06 INFO          0.1 MB  (   1 filer,       SOSI)  B20 Kartdata (Bouvetøya)
+2026-09-22 13:06:06 INFO          0.0 MB  (   1 filer,       SOSI)  B0 Stedsnavn (Bouvetøya)
+2026-09-22 13:06:06 INFO ======================================================================
+2026-09-22 13:07:58 INFO Fetching DOK status register...
+2026-09-22 13:07:58 INFO   324 DOK datasets in register.
+2026-09-22 13:07:58 INFO Fetching tjenestefeed...
+2026-09-22 13:07:58 INFO   1743 dataset/format entries in feed.
+2026-09-22 13:07:58 INFO ======================================================================
+2026-09-22 13:07:58 INFO DOK DATASET STATUS
+2026-09-22 13:07:58 INFO ======================================================================
+2026-09-22 13:07:58 INFO DOK datasets total (in feed): 135
+2026-09-22 13:07:58 INFO has supported format: 100
+2026-09-22 13:07:58 INFO no supported format: 35
+2026-09-22 13:07:58 INFO all format counts across DOK datasets:
+2026-09-22 13:07:58 INFO   SOSI 96
+2026-09-22 13:07:58 INFO   FGDB 95
+2026-09-22 13:07:58 INFO   GML 94
+2026-09-22 13:07:58 INFO   POSTGIS 64
+2026-09-22 13:07:58 INFO   TIFF 20
+2026-09-22 13:07:58 INFO   JPEG 6
+2026-09-22 13:07:58 INFO   EMF 6
+2026-09-22 13:07:58 INFO   AI 6
+2026-09-22 13:07:58 INFO   PPTX 5
+2026-09-22 13:07:58 INFO   DEM 4
+2026-09-22 13:07:58 INFO   GPKG 4
+2026-09-22 13:07:58 INFO   XYZ 4
+2026-09-22 13:07:58 INFO   GEOJSON 3
+2026-09-22 13:07:58 INFO   SHAPE 3
+2026-09-22 13:07:58 INFO   ENH 3
+2026-09-22 13:07:58 INFO   NED 3
+2026-09-22 13:07:58 INFO   GEOPACKAGE 2
+2026-09-22 13:07:58 INFO   CSV 2
+2026-09-22 13:07:58 INFO   XLSX 1
+2026-09-22 13:07:58 INFO   S57 1
+2026-09-22 13:07:58 INFO   DAT 1
+2026-09-22 13:07:58 INFO   GPX 1
+2026-09-22 13:07:58 INFO   SPATIALITE 1
+2026-09-22 13:07:58 INFO formats present ONLY on DOK datasets lacking any supported format:
+2026-09-22 13:07:58 INFO   TIFF 20
+2026-09-22 13:07:58 INFO   JPEG 6
+2026-09-22 13:07:58 INFO   EMF 6
+2026-09-22 13:07:58 INFO   AI 6
+2026-09-22 13:07:58 INFO   SOSI 6
+2026-09-22 13:07:58 INFO   PPTX 5
+2026-09-22 13:07:58 INFO   DEM 4
+2026-09-22 13:07:58 INFO   XYZ 4
+2026-09-22 13:07:58 INFO   ENH 3
+2026-09-22 13:07:58 INFO   NED 3
+2026-09-22 13:07:58 INFO   XLSX 1
+2026-09-22 13:07:58 INFO   DAT 1
+2026-09-22 13:07:58 INFO ======================================================================
+2026-09-22 13:07:58 INFO Sizing 135 DOK datasets (all formats)...
+2026-09-22 13:08:08 INFO   25/135 datasets sized (10s elapsed)
+2026-09-22 13:08:15 INFO   50/135 datasets sized (17s elapsed)
+2026-09-22 13:08:27 INFO   75/135 datasets sized (29s elapsed)
+2026-09-22 13:08:38 INFO   100/135 datasets sized (40s elapsed)
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0101_Halden_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0102_Sarpsborg_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0103_Fredrikstad_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0104_Moss_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0105_Sarpsborg_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0106_Fredrikstad_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0111_Hvaler_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0113_Borge_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0114_Varteig_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0115_Skjeberg_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0118_Aremark_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0119_Marker_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0121_Romskog_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0122_Trogstad_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0123_Spydeberg_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0124_Askim_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0125_Eidsberg_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0127_Skiptvet_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0128_Rakkestad_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0130_Tune_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0131_Rolvsoy_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0133_Krakeroy_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0134_Onsoy_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0135_Rade_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0136_Rygge_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0137_Valer_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:41 WARNING d2ae29bd-0692-40de-a173-833afcddfe22: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N250Raster/TIFF/Basisdata_0138_Hobol_25833_N250Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0101_Halden_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0102_Sarpsborg_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0103_Fredrikstad_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0104_Moss_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0105_Sarpsborg_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0106_Fredrikstad_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0111_Hvaler_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0113_Borge_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0114_Varteig_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0115_Skjeberg_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0118_Aremark_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0119_Marker_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0121_Romskog_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0122_Trogstad_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0123_Spydeberg_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0124_Askim_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0125_Eidsberg_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0127_Skiptvet_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0128_Rakkestad_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0130_Tune_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0131_Rolvsoy_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0133_Krakeroy_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0134_Onsoy_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0135_Rade_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0136_Rygge_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0137_Valer_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 WARNING b466d866-8e32-438b-bb58-80e52fe85ada: HEAD failed for https://nedlasting.geonorge.no/geonorge/Basisdata/N500Raster/TIFF/Basisdata_0138_Hobol_25833_N500Raster_TIFF.zip: HTTP 404 on HEAD
+2026-09-22 13:08:46 INFO   125/135 datasets sized (48s elapsed)
+2026-09-22 13:08:50 INFO   135/135 datasets sized (52s elapsed)
+2026-09-22 13:08:50 INFO Wrote 135 rows to /Users/alenos/dev/portolan-poc/dok_experiment/dok_status.csv
+2026-09-22 13:08:50 INFO ======================================================================
+2026-09-22 13:08:50 INFO DOK DATASET SIZES (all datasets, best available format each)
+2026-09-22 13:08:50 INFO ======================================================================
+2026-09-22 13:08:50 INFO Datasets sized      : 135
+2026-09-22 13:08:50 INFO Files counted       : 38074
+2026-09-22 13:08:50 INFO Datasets with errors: 25
+2026-09-22 13:08:50 INFO Total size          : 201.45 GB (206282.5 MB)
+2026-09-22 13:08:50 INFO Top 20 DOK datasets by size:
+2026-09-22 13:08:50 INFO      64738.5 MB  ( 599 filer,        ENH)  Dybdedata - terrengmodeller 5 meters grid
+2026-09-22 13:08:50 INFO      33868.6 MB  (1336 filer,       TIFF)  N50 Raster (UTM33) - Rutevis
+2026-09-22 13:08:50 INFO      23420.3 MB  ( 683 filer,       FGDB)  Matrikkelen - Eiendomskart Teig
+2026-09-22 13:08:50 INFO      18791.0 MB  ( 681 filer,       FGDB)  N50 Kartdata
+2026-09-22 13:08:50 INFO      11169.1 MB  ( 770 filer,       TIFF)  N50 Raster (UTM32) - Rutevis
+2026-09-22 13:08:50 INFO       7161.0 MB  ( 254 filer,        DEM)  DTM 10 Terrengmodell (UTM33)
+2026-09-22 13:08:50 INFO       6541.4 MB  ( 681 filer,       FGDB)  Flom aktsomhetsområder
+2026-09-22 13:08:50 INFO       4886.3 MB  (1024 filer,        ENH)  Dybdedata - terrengmodeller 25 meters grid
+2026-09-22 13:08:50 INFO       4821.6 MB  ( 681 filer,       FGDB)  N100 Kartdata
+2026-09-22 13:08:50 INFO       4507.1 MB  ( 146 filer,        DEM)  DTM 10 Terrengmodell (UTM32)
+2026-09-22 13:08:50 INFO       3443.0 MB  ( 374 filer,       TIFF)  N100 Raster (UTM33) - Rutevis
+2026-09-22 13:08:50 INFO       2788.0 MB  (1683 filer,        ENH)  Dybdedata - terrengmodeller 50 meters grid
+2026-09-22 13:08:50 INFO       2706.0 MB  ( 683 filer,       FGDB)  Matrikkelen - Bygningspunkt
+2026-09-22 13:08:50 INFO       2317.7 MB  ( 681 filer,       FGDB)  Aktsomhetskart for snøskred
+2026-09-22 13:08:50 INFO       2076.3 MB  ( 245 filer,       TIFF)  N50 Raster (UTM35) - Rutevis
+2026-09-22 13:08:50 INFO       1487.2 MB  ( 679 filer,       FGDB)  Aktsomhetskart for jord- og flomskred
+2026-09-22 13:08:50 INFO       1467.8 MB  ( 681 filer,       FGDB)  N250 Kartdata
+2026-09-22 13:08:50 INFO       1410.9 MB  (  48 filer,        DEM)  DTM 10 Terrengmodell (UTM35)
+2026-09-22 13:08:50 INFO       1350.4 MB  ( 683 filer,       FGDB)  Matrikkelen - Adresse Leilighetsnivå
+2026-09-22 13:08:50 INFO       1083.0 MB  ( 364 filer,       FGDB)  Flomsoner
+2026-09-22 13:08:50 INFO ======================================================================

@@ -4,7 +4,7 @@
 feed_url: "https://nedlasting.geonorge.no/geonorge/Tjenestefeed_daglig.xml"
 
 sample:
-  size: 20
+  size: 200
   # Formats GDAL/OGR can read directly. All of these are normalized to
   # GeoPackage via ogr2ogr before `portolan add` ever sees them (see
   # convert_gpkg.py) to sidestep a FileGDB-specific gap in portolan-cli
@@ -31,7 +31,7 @@ sample:
   # UUID (tjenestefeed's CSW describedby link vs. the register's kartkatalog
   # link), not by title, so formatting differences between the two sources
   # don't cause false negatives. See dok_register.py.
-  dok_register_enabled: false
+  dok_register_enabled: true
   dok_register_url: "https://register.geonorge.no/api/geodatalov-statusregister.csv"
 
 paths:

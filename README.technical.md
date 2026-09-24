@@ -186,6 +186,66 @@ module docstring for the code-level detail:
   logged in `REPORT.md` under "Feilede/hoppet over datasett" and the run
   continues with the rest of the sample.
 
+## Publishing to Azure Blob Storage
+
+The catalog is published to Azure Blob Storage (S3-compatible endpoint), either
+per-collection via `portolan push`, or as a whole via the Azure CLI. Credentials
+and destination info live in `.env` (gitignored, copy from `.env.example`):
+
+```bash
+# --- portolan-cli remote (DigitalOcean Spaces, S3-compatible) ---
+# Used by `portolan push` / `portolan sync` when no destination is passed explicitly.
+PORTOLAN_REMOTE=https://kartaistorage.blob.core.windows.net/skygeo/dok2portolan-poc
+
+AZURE_STORAGE_ACCOUNT=...
+AZURE_STORAGE_SAS_TOKEN=...
+
+# Destination path (blob prefix) inside the container used by `az storage blob
+# upload-batch` below.
+AZURE_DESTINATION_PATH=dok2portolan-poc
+```
+
+Load it into the shell before running `portolan push`/`sync` or `az` — plain
+`source .env` sets the variables but doesn't export them to child processes, so
+`set -a`/`set +a` around it is required:
+
+```bash
+set -a && source .env && set +a
+```
+
+`portolan push`/`sync` always target one collection (`-c <collection>`), never
+the whole catalog:
+
+```bash
+portolan push -c <collection>              # uses PORTOLAN_REMOTE
+portolan sync s3://mybucket/my-catalog -c <collection> --fix   # explicit destination
+```
+
+To publish the entire `catalog/` directory in one shot, use the Azure CLI
+instead — `az storage blob upload-batch` mirrors the whole tree under
+`AZURE_DESTINATION_PATH`, preserving each collection's relative subpath:
+
+```bash
+az storage blob upload-batch \
+  --account-name "$AZURE_STORAGE_ACCOUNT" \
+  --destination skygeo \
+  --destination-path "$AZURE_DESTINATION_PATH" \
+  --sas-token "$AZURE_STORAGE_SAS_TOKEN" \
+  --source catalog \
+  --overwrite
+```
+
+Verify what actually landed in the bucket:
+
+```bash
+az storage blob list \
+  --account-name "$AZURE_STORAGE_ACCOUNT" \
+  --container-name skygeo \
+  --sas-token "$AZURE_STORAGE_SAS_TOKEN" \
+  --prefix "$AZURE_DESTINATION_PATH/<collection>/" \
+  --output table
+```
+
 ## Project layout
 
 ```

@@ -20,3 +20,4 @@ wheels/
 .DS_Store
 pmtiles_experiment/*.parquet
 pmtiles_experiment/*.pmtiles
+dok_experiment/cache
